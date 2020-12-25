@@ -1,18 +1,24 @@
 package com.warehouse.warehouse.subproducts.models;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.warehouse.warehouse.product.Product;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 public class Gpu extends Product {
 
+    @NotEmpty(message = "Cannot be empty")
     private String layout;
 
+    @NotNull(message = "Cannot be null")
+    @Min(value = 1, message = "Must be greater than 0")
     private int vram;
 
+    @NotEmpty(message = "Cannot be empty")
     private String typeOfMemory;
 
     public Gpu() {

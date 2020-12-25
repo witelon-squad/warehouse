@@ -3,15 +3,20 @@ package com.warehouse.warehouse.subproducts.models;
 import com.warehouse.warehouse.product.Product;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
 public class Cooler extends Product {
 
+
+    @NotEmpty(message = "Cannot be empty")
     private String typeOfColling;
 
+    @NotEmpty(message = "Cannot be empty")
     private String fan;
 
+    @NotEmpty(message = "Cannot be empty")
     private String speedControl;
 
     public Cooler() {

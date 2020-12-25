@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,7 +42,7 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<EntityModel<Product>> newProduct(@RequestBody Product product) {
+    public ResponseEntity<EntityModel<Product>> newProduct(@Valid @RequestBody Product product) {
 
         product.setCreatedAt(LocalDateTime.now());
         Product newProduct = repository.save(product);

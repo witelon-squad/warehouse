@@ -1,21 +1,33 @@
 package com.warehouse.warehouse.product;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.warehouse.warehouse.subproducts.models.Cooler;
-import com.warehouse.warehouse.subproducts.models.Gpu;
+import com.warehouse.warehouse.subproducts.models.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        property = "type"
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type",
+        visible = true
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Gpu.class, name = "gpu"),
-        @JsonSubTypes.Type(value = Cooler.class, name = "cooler")
+        @JsonSubTypes.Type(value = Cooler.class, name = "cooler"),
+        @JsonSubTypes.Type(value = Cpu.class, name = "cpu"),
+        @JsonSubTypes.Type(value = Hdd.class, name = "hdd"),
+        @JsonSubTypes.Type(value = Motherboard.class, name = "motherboard"),
+        @JsonSubTypes.Type(value = Psu.class, name = "psu"),
+        @JsonSubTypes.Type(value = Ram.class, name = "ram"),
+        @JsonSubTypes.Type(value = Ssd.class, name = "ssd"),
 })
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -24,18 +36,26 @@ abstract public class Product {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotEmpty(message = "Cannot be empty")
     private String name;
 
+    @NotEmpty(message = "Cannot be empty")
     private String description;
 
+    @NotNull(message = "Cannot be null")
+    @Min(value = 1, message = "Must be greater than 0")
     private Double price;
 
     private LocalDateTime createdAt;
 
+    @NotEmpty(message = "Cannot be null")
+    @JsonProperty
+    private String type;
+
     public Product() {
     }
 
-    public Product(String name, String description, Double price) {
+    public Product(String name, String description, Double price, String type) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -82,6 +102,13 @@ abstract public class Product {
         this.createdAt = createdAt;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -92,12 +119,13 @@ abstract public class Product {
                 Objects.equals(name, product.name) &&
                 Objects.equals(description, product.description) &&
                 Objects.equals(price, product.price) &&
-                Objects.equals(createdAt, product.createdAt);
+                Objects.equals(createdAt, product.createdAt) &&
+                Objects.equals(type, product.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, createdAt);
+        return Objects.hash(id, name, description, price, createdAt, type);
     }
 
     @Override
@@ -108,6 +136,7 @@ abstract public class Product {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", createdAt=" + createdAt +
+                ", type='" + type + '\'' +
                 '}';
     }
 }
