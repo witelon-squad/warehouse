@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class ProductController {
 
@@ -57,7 +58,7 @@ public class ProductController {
 
         repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         repository.deleteById(id);
-        return new ResponseEntity<String>("Movie Deleted", HttpStatus.OK);
+        return new ResponseEntity<String>("Product has been deleted", HttpStatus.OK);
     }
 
 
