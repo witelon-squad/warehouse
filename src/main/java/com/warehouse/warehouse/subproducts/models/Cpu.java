@@ -3,9 +3,7 @@ package com.warehouse.warehouse.subproducts.models;
 import com.warehouse.warehouse.product.Product;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -14,22 +12,19 @@ public class Cpu extends Product {
     @NotEmpty(message = "Cannot be empty")
     private String series;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Double timing;
+    @NotEmpty(message = "Cannot be empty")
+    private String timing;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer cores;
+    @NotEmpty(message = "Cannot be empty")
+    private String cores;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer cache;
+    @NotEmpty(message = "Cannot be empty")
+    private String cache;
 
     public Cpu() {
     }
 
-    public Cpu(String series, Double timing, Integer cores, Integer cache) {
+    public Cpu(@NotEmpty(message = "Cannot be empty") String series, @NotEmpty(message = "Cannot be empty") String timing, @NotEmpty(message = "Cannot be empty") String cores, @NotEmpty(message = "Cannot be empty") String cache) {
         this.series = series;
         this.timing = timing;
         this.cores = cores;
@@ -44,27 +39,27 @@ public class Cpu extends Product {
         this.series = series;
     }
 
-    public Double getTiming() {
+    public String getTiming() {
         return timing;
     }
 
-    public void setTiming(Double timing) {
+    public void setTiming(String timing) {
         this.timing = timing;
     }
 
-    public Integer getCores() {
+    public String getCores() {
         return cores;
     }
 
-    public void setCores(Integer cores) {
+    public void setCores(String cores) {
         this.cores = cores;
     }
 
-    public Integer getCache() {
+    public String getCache() {
         return cache;
     }
 
-    public void setCache(Integer cache) {
+    public void setCache(String cache) {
         this.cache = cache;
     }
 

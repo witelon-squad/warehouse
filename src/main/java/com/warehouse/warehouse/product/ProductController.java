@@ -3,6 +3,9 @@ package com.warehouse.warehouse.product;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import com.warehouse.warehouse.exceptions.ProductNotFoundException;
+import com.warehouse.warehouse.subproducts.models.Gpu;
+import com.warehouse.warehouse.subproducts.repositories.GpuRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -26,17 +29,20 @@ public class ProductController {
         this.assembler = assembler;
     }
 
+    @Autowired
+    GpuRepository gpuRepository;
+
     @GetMapping("/products")
-    public CollectionModel<EntityModel<Product>> allProducts() {
+    public CollectionModel<EntityModel<Product>> getAllProducts() {
         List<EntityModel<Product>> products = repository.findAll().stream().map(assembler::toModel)
                 .collect(Collectors.toList());
 
         return CollectionModel.of(products,
-                linkTo(methodOn(ProductController.class).allProducts()).withSelfRel());
+                linkTo(methodOn(ProductController.class).getAllProducts()).withSelfRel());
     }
 
     @GetMapping("/products/{id}")
-    public EntityModel<Product> one(@PathVariable Long id) {
+    public EntityModel<Product> getOneProduct(@PathVariable Long id) {
         Product product = repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
 
         return assembler.toModel(product);
@@ -49,16 +55,38 @@ public class ProductController {
         Product newProduct = repository.save(product);
 
         return ResponseEntity
-                .created(linkTo(methodOn(ProductController.class).one(newProduct.getId())).toUri())
+                .created(linkTo(methodOn(ProductController.class).getOneProduct(newProduct.getId())).toUri())
                 .body(assembler.toModel(newProduct));
     }
 
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id){
+    public ResponseEntity<?> deleteProduct(@PathVariable Long id){
 
         repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
         repository.deleteById(id);
         return new ResponseEntity<String>("Product has been deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/products/{id}")
+    public ResponseEntity<?> editProduct(@Valid @PathVariable Long id, @RequestBody Product newProduct){
+
+        Product updatedProduct = repository.findById(id)
+                .map(product -> {
+                    product.setName(newProduct.getName());
+                    product.setDescription(newProduct.getDescription());
+                    product.setPrice(newProduct.getPrice());
+                    product.setQuantity(newProduct.getQuantity());
+                    product.setType(newProduct.getType());
+                    return repository.save(product);
+                }).orElseGet(() -> {
+                    newProduct.setId(id);
+                    return repository.save(newProduct);
+                });
+
+        return ResponseEntity
+                .created(linkTo(methodOn(ProductController.class).getOneProduct(updatedProduct.getId())).toUri())
+                .body(assembler.toModel(updatedProduct));
+
     }
 
 

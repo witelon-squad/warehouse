@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -52,14 +51,20 @@ abstract public class Product {
     @JsonProperty
     private String type;
 
+    @NotNull(message = "Cannot be null")
+    @Min(value = 1)
+    private Integer quantity;
+
     public Product() {
     }
 
-    public Product(String name, String description, Double price, String type) {
+    public Product(String name, String description, Double price, String type, Integer quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.createdAt = LocalDateTime.now();
+        this.type = type;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -110,6 +115,14 @@ abstract public class Product {
         this.type = type;
     }
 
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -120,12 +133,13 @@ abstract public class Product {
                 Objects.equals(description, product.description) &&
                 Objects.equals(price, product.price) &&
                 Objects.equals(createdAt, product.createdAt) &&
-                Objects.equals(type, product.type);
+                Objects.equals(type, product.type) &&
+                Objects.equals(quantity, product.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, price, createdAt, type);
+        return Objects.hash(id, name, description, price, createdAt, type, quantity);
     }
 
     @Override
@@ -137,6 +151,7 @@ abstract public class Product {
                 ", price=" + price +
                 ", createdAt=" + createdAt +
                 ", type='" + type + '\'' +
+                ", quantity=" + quantity +
                 '}';
     }
 }

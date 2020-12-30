@@ -3,9 +3,7 @@ package com.warehouse.warehouse.subproducts.models;
 import com.warehouse.warehouse.product.Product;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -14,9 +12,8 @@ public class Gpu extends Product {
     @NotEmpty(message = "Cannot be empty")
     private String layout;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private int vram;
+    @NotEmpty(message = "Cannot be empty")
+    private String vram;
 
     @NotEmpty(message = "Cannot be empty")
     private String typeOfMemory;
@@ -24,7 +21,7 @@ public class Gpu extends Product {
     public Gpu() {
     }
 
-    public Gpu(String layout, int vram, String typeOfMemory) {
+    public Gpu(String layout, String vram, String typeOfMemory) {
         this.layout = layout;
         this.vram = vram;
         this.typeOfMemory = typeOfMemory;
@@ -38,11 +35,11 @@ public class Gpu extends Product {
         this.layout = layout;
     }
 
-    public int getVram() {
+    public String getVram() {
         return vram;
     }
 
-    public void setVram(int vram) {
+    public void setVram(String vram) {
         this.vram = vram;
     }
 

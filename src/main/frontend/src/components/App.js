@@ -5,14 +5,15 @@ import Header from './Header';
 import { Provider } from 'react-redux';
 import store from '../store';
 import Products from './Products';
+import AddProduct from './AddProduct';
 
 function App() {
   return (
     <Provider store={store}>
       <Fragment>
         <Header />
-        <div className="container-fluid">
-          <Dashboard />
+        <div className="container">
+          <AddProduct />
           <Products />
         </div>
       </Fragment>

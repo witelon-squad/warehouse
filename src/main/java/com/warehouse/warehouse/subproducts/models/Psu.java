@@ -11,9 +11,8 @@ import java.util.Objects;
 @Entity
 public class Psu extends Product {
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer power;
+    @NotEmpty(message = "Cannot be empty")
+    private String power;
 
     @NotEmpty(message = "Cannot be empty")
     private String standard;
@@ -27,18 +26,18 @@ public class Psu extends Product {
     public Psu() {
     }
 
-    public Psu(Integer power, String standard, String efficiency, String certificate) {
+    public Psu(String power, String standard, String efficiency, String certificate) {
         this.power = power;
         this.standard = standard;
         this.efficiency = efficiency;
         this.certificate = certificate;
     }
 
-    public Integer getPower() {
+    public String getPower() {
         return power;
     }
 
-    public void setPower(Integer power) {
+    public void setPower(String power) {
         this.power = power;
     }
 

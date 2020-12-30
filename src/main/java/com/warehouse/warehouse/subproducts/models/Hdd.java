@@ -11,36 +11,33 @@ import java.util.Objects;
 @Entity
 public class Hdd extends Product {
 
-    @NotNull(message = "Cannot be empty")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer capacity;
+    @NotEmpty(message = "Cannot be empty")
+    private String capacity;
 
     @NotEmpty(message = "Cannot be empty")
     private String diskInterface;
 
-    @NotNull(message = "Cannot be empty")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Double format;
+    @NotEmpty(message = "Cannot be empty")
+    private String format;
 
-    @NotNull(message = "Cannot be empty")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer rotationSpeed;
+    @NotEmpty(message = "Cannot be empty")
+    private String rotationSpeed;
 
     public Hdd() {
     }
 
-    public Hdd(Integer capacity, String diskInterface, Double format, Integer rotationSpeed) {
+    public Hdd(String capacity, String diskInterface, String format, String rotationSpeed) {
         this.capacity = capacity;
         this.diskInterface = diskInterface;
         this.format = format;
         this.rotationSpeed = rotationSpeed;
     }
 
-    public Integer getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(Integer capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
@@ -52,19 +49,19 @@ public class Hdd extends Product {
         this.diskInterface = diskInterface;
     }
 
-    public Double getFormat() {
+    public String getFormat() {
         return format;
     }
 
-    public void setFormat(Double format) {
+    public void setFormat(String format) {
         this.format = format;
     }
 
-    public Integer getRotationSpeed() {
+    public String getRotationSpeed() {
         return rotationSpeed;
     }
 
-    public void setRotationSpeed(Integer rotationSpeed) {
+    public void setRotationSpeed(String rotationSpeed) {
         this.rotationSpeed = rotationSpeed;
     }
 

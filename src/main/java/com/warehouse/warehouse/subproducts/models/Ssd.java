@@ -3,44 +3,39 @@ package com.warehouse.warehouse.subproducts.models;
 import com.warehouse.warehouse.product.Product;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 public class Ssd extends Product {
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer capacity;
+    @NotEmpty(message = "Cannot be empty")
+    private String capacity;
 
     @NotEmpty(message = "Cannot be empty")
     private String diskInterface;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer writeSpeed;
+    @NotEmpty(message = "Cannot be empty")
+    private String writeSpeed;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer saveSpeed;
+    @NotEmpty(message = "Cannot be empty")
+    private String saveSpeed;
 
     public Ssd() {
     }
 
-    public Ssd(Integer capacity, String diskInterface, Integer writeSpeed, Integer saveSpeed) {
+    public Ssd(String capacity, String diskInterface, String writeSpeed, String saveSpeed) {
         this.capacity = capacity;
         this.diskInterface = diskInterface;
         this.writeSpeed = writeSpeed;
         this.saveSpeed = saveSpeed;
     }
 
-    public Integer getCapacity() {
+    public String getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(Integer capacity) {
+    public void setCapacity(String capacity) {
         this.capacity = capacity;
     }
 
@@ -52,19 +47,19 @@ public class Ssd extends Product {
         this.diskInterface = diskInterface;
     }
 
-    public Integer getWriteSpeed() {
+    public String getWriteSpeed() {
         return writeSpeed;
     }
 
-    public void setWriteSpeed(Integer writeSpeed) {
+    public void setWriteSpeed(String writeSpeed) {
         this.writeSpeed = writeSpeed;
     }
 
-    public Integer getSaveSpeed() {
+    public String getSaveSpeed() {
         return saveSpeed;
     }
 
-    public void setSaveSpeed(Integer saveSpeed) {
+    public void setSaveSpeed(String saveSpeed) {
         this.saveSpeed = saveSpeed;
     }
 

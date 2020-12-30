@@ -3,44 +3,39 @@ package com.warehouse.warehouse.subproducts.models;
 import com.warehouse.warehouse.product.Product;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
 public class Ram extends Product {
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer totalCapacity;
+    @NotEmpty(message = "Cannot be empty")
+    private String totalCapacity;
 
     @NotEmpty(message = "Cannot be empty")
     private String typeOfMemory;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer speed;
+    @NotEmpty(message = "Cannot be empty")
+    private String speed;
 
-    @NotNull(message = "Cannot be null")
-    @Min(value = 1, message = "Must be greater than 0")
-    private Integer delay;
+    @NotEmpty(message = "Cannot be empty")
+    private String delay;
 
     public Ram() {
     }
 
-    public Ram(Integer totalCapacity, String typeOfMemory, Integer speed, Integer delay) {
+    public Ram(String totalCapacity, String typeOfMemory, String speed, String delay) {
         this.totalCapacity = totalCapacity;
         this.typeOfMemory = typeOfMemory;
         this.speed = speed;
         this.delay = delay;
     }
 
-    public Integer getTotalCapacity() {
+    public String getTotalCapacity() {
         return totalCapacity;
     }
 
-    public void setTotalCapacity(Integer totalCapacity) {
+    public void setTotalCapacity(String totalCapacity) {
         this.totalCapacity = totalCapacity;
     }
 
@@ -52,19 +47,19 @@ public class Ram extends Product {
         this.typeOfMemory = typeOfMemory;
     }
 
-    public Integer getSpeed() {
+    public String getSpeed() {
         return speed;
     }
 
-    public void setSpeed(Integer speed) {
+    public void setSpeed(String speed) {
         this.speed = speed;
     }
 
-    public Integer getDelay() {
+    public String getDelay() {
         return delay;
     }
 
-    public void setDelay(Integer delay) {
+    public void setDelay(String delay) {
         this.delay = delay;
     }
 

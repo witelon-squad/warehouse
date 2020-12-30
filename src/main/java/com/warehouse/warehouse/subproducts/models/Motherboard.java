@@ -27,6 +27,30 @@ public class Motherboard extends Product {
         this.chipset = chipset;
     }
 
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getCpuSocket() {
+        return cpuSocket;
+    }
+
+    public void setCpuSocket(String cpuSocket) {
+        this.cpuSocket = cpuSocket;
+    }
+
+    public String getChipset() {
+        return chipset;
+    }
+
+    public void setChipset(String chipset) {
+        this.chipset = chipset;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
