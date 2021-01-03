@@ -7,9 +7,13 @@ export class Alerts extends Component {
     componentDidUpdate(prevProps) {
         const { error, alert, message } = this.props;
         if (error !== prevProps.error) {
+            if(error.status !== 404)
             for (const property in error.msg) {
                 if ([error.msg.property]) alert.error(`${property} ${error.msg[property]}`)
+            } else {
+                if (error.status === 404) alert.error(`${error.status} PRODUCT DOESNT EXIST`)
             }
+            
         }
 
         if (message !== prevProps.message) {

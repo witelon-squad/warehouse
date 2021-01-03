@@ -6,16 +6,18 @@ import { Link } from 'react-router-dom';
 
 export class Products extends Component {
 
-
     componentDidMount() {
         this.props.getProducts();
     }
 
     render() {
+
         return (
             <div className='bg-dark text-light'>
                 <table className="table table-success table-hover align-middle caption-top">
-                    <caption className='px-2'>List of products</caption>
+                    <caption className='px-3'>
+                        List of products
+                    </caption>
                     <thead className='table-dark'>
                         <tr>
                             <th>#</th>

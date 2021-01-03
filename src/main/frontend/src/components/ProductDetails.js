@@ -28,12 +28,12 @@ export class ProductDetails extends Component {
     onSubmit = e => {
         e.preventDefault();
         this.props.updateProduct(this.state.currentProduct.id, this.state.currentProduct)
-        this.props.history.push("/products")
+        this.props.history.push("/products");
     }
 
     onDelete = e => {
         this.props.deleteProduct(this.props.currentProduct.id)
-        this.props.history.push("/products")
+        this.props.history.push("/products");
     }
 
 
@@ -42,9 +42,10 @@ export class ProductDetails extends Component {
         const shouldBeInteger = ["quantity"];
         const shouldBeDouble = ["price"]
 
-        console.log(this.props)
 
-        return (
+
+        return (this.state.currentProduct.id ?
+
             <div className='card card-body'>
                 <form onSubmit={this.onSubmit} id="my-form">
                     {Object.keys(this.state.currentProduct).map(key => {
@@ -68,7 +69,12 @@ export class ProductDetails extends Component {
                 </form>
                 <button form="my-form" type='submit' className='btn btn-primary mt-3'>UPDATE</button>
                 <button className='btn btn-danger mt-3' onClick={this.onDelete}>DELETE</button>
-            </div>)
+            </div>
+
+            :
+
+            <h3 className='text-center mt-5'>Product doesn't exists</h3>
+        )
     }
 }
 
