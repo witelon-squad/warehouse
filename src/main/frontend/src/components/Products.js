@@ -1,42 +1,45 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getProducts } from "../actions/products";
+import { Link } from 'react-router-dom';
 
 
 export class Products extends Component {
 
-    componentDidMount(){
+
+    componentDidMount() {
         this.props.getProducts();
     }
 
     render() {
         return (
-            <Fragment>
-                <h2>Products</h2>
-                <table className="table table-striped">
-                    <thead>
+            <div className='bg-dark text-light'>
+                <table className="table table-success table-hover align-middle caption-top">
+                    <caption className='px-2'>List of products</caption>
+                    <thead className='table-dark'>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Product name</th>
                             <th>Price</th>
                             <th>Type</th>
+                            <th>Quantity</th>
                             <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {console.log(this.props.allProducts)}
-                        { this.props.listOfProducts.map(product => (
+                        {this.props.listOfProducts.map(product => (
                             <tr key={product.id}>
                                 <td>{product.id}</td>
                                 <td>{product.name}</td>
                                 <td>{product.price.toFixed(2)}</td>
                                 <td>{product.type.toUpperCase()}</td>
-                                <td><button className="btn btn-outline-info btn-sm">+</button></td>
+                                <td>{product.quantity}</td>
+                                <td><Link to={`/products/${product.id}`} className="btn btn-outline-dark btn-sm">Detail</Link></td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </Fragment>
+            </div>
         )
     }
 }

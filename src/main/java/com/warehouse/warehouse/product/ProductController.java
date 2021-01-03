@@ -3,8 +3,6 @@ package com.warehouse.warehouse.product;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import com.warehouse.warehouse.exceptions.ProductNotFoundException;
-import com.warehouse.warehouse.subproducts.models.Gpu;
-import com.warehouse.warehouse.subproducts.repositories.GpuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -24,13 +22,11 @@ public class ProductController {
     private final ProductRepository repository;
     private final ProductModelAssembler assembler;
 
+    @Autowired
     public ProductController(ProductRepository repository, ProductModelAssembler assembler) {
         this.repository = repository;
         this.assembler = assembler;
     }
-
-    @Autowired
-    GpuRepository gpuRepository;
 
     @GetMapping("/products")
     public CollectionModel<EntityModel<Product>> getAllProducts() {
@@ -67,27 +63,39 @@ public class ProductController {
         return new ResponseEntity<String>("Product has been deleted", HttpStatus.OK);
     }
 
+    @PatchMapping("/products/{id}")
+    public ResponseEntity<?> substractQuantity(@Valid @PathVariable Long id){
+
+        Product product = repository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
+        product.setQuantity(product.getQuantity() - 1);
+        repository.save(product);
+
+        return ResponseEntity
+                .ok().body(assembler.toModel(product));
+    }
+
     @PutMapping("/products/{id}")
-    public ResponseEntity<?> editProduct(@Valid @PathVariable Long id, @RequestBody Product newProduct){
+    public ResponseEntity<?> editProduct(@Valid @PathVariable Long id, @RequestBody Product productChanges){
 
         Product updatedProduct = repository.findById(id)
                 .map(product -> {
-                    product.setName(newProduct.getName());
-                    product.setDescription(newProduct.getDescription());
-                    product.setPrice(newProduct.getPrice());
-                    product.setQuantity(newProduct.getQuantity());
-                    product.setType(newProduct.getType());
+                    product.setName(productChanges.getName());
+                    product.setDescription(productChanges.getDescription());
+                    product.setPrice(productChanges.getPrice());
+                    product.setQuantity(productChanges.getQuantity());
                     return repository.save(product);
-                }).orElseGet(() -> {
-                    newProduct.setId(id);
-                    return repository.save(newProduct);
+                })
+                .orElseGet(() -> {
+                    productChanges.setId(id);
+                    return repository.save(productChanges);
                 });
 
         return ResponseEntity
-                .created(linkTo(methodOn(ProductController.class).getOneProduct(updatedProduct.getId())).toUri())
-                .body(assembler.toModel(updatedProduct));
-
+                .ok().body(assembler.toModel(updatedProduct));
     }
+
+
+
 
 
 
