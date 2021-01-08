@@ -7,7 +7,10 @@ services:
     ports:
       - "8080:8080" 
     environment:
+      #Set address your databases 
       SPRING_DATASOURCE_URL: jdbc:mysql://95.111.242.110:3306/warehousedatabase
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 135elo99 
     restart: always
     depends_on: 
       - db   
