@@ -17,17 +17,19 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .cors()
                 .and()
                 .authorizeRequests()
                 .anyRequest()
-                .permitAll();
+                .permitAll().and().httpBasic().disable();
     }
 
     @Bean
     protected CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(ImmutableList.of("*"));
+//        configuration.setAllowedOrigins(ImmutableList.of("*"));
+        configuration.setAllowedOriginPatterns(ImmutableList.of("*"));
         configuration.setAllowedMethods(ImmutableList.of("HEAD","GET","POST","PUT","DELETE","PATCH"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
