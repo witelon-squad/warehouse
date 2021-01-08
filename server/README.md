@@ -1,1 +1,0 @@
-ENDPOINT http://localhost:8080/products [GET,POST,PUT,DELETE]
