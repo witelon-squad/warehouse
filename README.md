@@ -1,7 +1,17 @@
 # Projekt warehouse
 ## Opis
-Aplikacja ma za zadanie pomóc pracownikom wprowadzać nowe towary i komunikować się ze sklepem po przez api restowe.
-Aplikacja jest podzielona na takie kontenery jak:backend,view,baza danych i narzędzie phpmyadmin. Jest to przykład architektury mikrousług ponieważ mamy wiele usług które ze sobą się komunikują. Kontenery można podzielić poprzez wage czyli w projekcie mamy głównie kontenery wagi  muszej tzw 'flyweight' i lekie.Zapewne zapytasz dlaczego nie ma wagi cieżkiej tzw 'Heavyweight'.Ponieważ w obrazach projektu nie były potrzebne na danym kontenerze narzędzia do pracy z nim.Aplikacja jest budowana na dockerze poprzez plik dockerfile i z pliku jar pożniej  a nie tylko odpala z pliku jar.Ponieważ jest to furtka do za implementowania prosecu automatyzacji czyli wgrywamy najnowszą wersje projektu na githuba a githube actions uruchamia proces wgrywania plików na serwer i uruchomienia budowania obrazu na dockerze czy z budowania nawet na githubie i przerzuceniu pliku jar na serwer i tylko jego odpalenie.
+Przygotowana przez nas aplikacja ma za zadanie zarówno pomóc pracownikom w wprowadzaniu nowych towarów, jak i w komunikacji ze sklepem poprzez wykorzystanie API restowego. 
+Aplikacja jest podzielona na takie kontenery jak:
+- backend,
+- view,
+- baza danych,
+- narzędzie phpmyadmin. 
+Jest to przykład architektury mikrousług, ponieważ korzystamy z wielu usług, które 
+się ze sobą komunikują. Kontenery można podzielić poprzez wagę, czyli w projekcie mamy głównie kontenery wagi muszej tzw. „flyweight” i lekkie. Na myśl przychodzi jednak pytanie: 
+Dlaczego w naszym projekcie nie korzystamy z kontenerów wagi ciężkiej, tzw. „Heavyweight”?
+Dzieje się tak, ponieważ w naszym projekcie nie były one nam po prostu potrzebne. 
+Aplikacja jest zbudowana na dockerze, poprzez plik dockerfile, a następnie jar. Zdecydowaliśmy się by aplikacja nie włączała się tylko z pliku jar, ponieważ jest to furtka do zaimplementowania procesu automatyzacji. Działanie to polega na wgraniu najnowszej wersji projektu na githuba, który to za pomocą githube actions uruchamia proces wgrywania plików na serwer, a następnie budowania obrazu na dockerze. Innym rozwiązaniem jest wykorzystanie github action do zbudowania gotowego obrazu, który zostanie przerzucony jako gotowy plik jar na serwer, gdzie następnie zostanie uruchomiony.
+
 ## Technologia
 
  - Spring 
