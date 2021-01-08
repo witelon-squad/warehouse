@@ -6,6 +6,7 @@ Aplikacja jest podzielona na takie kontenery jak:
 - view,
 - baza danych,
 - narzędzie phpmyadmin. 
+
 Jest to przykład architektury mikrousług, ponieważ korzystamy z wielu usług, które 
 się ze sobą komunikują. Kontenery można podzielić poprzez wagę, czyli w projekcie mamy głównie kontenery wagi muszej tzw. „flyweight” i lekkie. Na myśl przychodzi jednak pytanie: 
 Dlaczego w naszym projekcie nie korzystamy z kontenerów wagi ciężkiej, tzw. „Heavyweight”?
