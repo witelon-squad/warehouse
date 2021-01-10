@@ -129,7 +129,7 @@ $ docker-compose build --no-cache --pull
 
 | Lp  | nazwa  | akcja                                                                                                                                |
 | --- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | GET    | /products pobiera wszystkie możliwe produkty z bazy danych                                                                           |
+| 1   | GET    | '''/products''' pobiera wszystkie możliwe produkty z bazy danych                                                                           |
 | 2   | GET    | /products/{id} pobiera jeden konkretny produkt sprecyzowany przez 'id'                                                                          |
 | 3   | POST   | /products dodaje nowy produkt do bazy danych na podstawie przekazanego ciała                                                         |
 | 4   | PUT    | /products/{id} zamienia istniejący produkt na danym id z przekazanym ciałem                                                          |
