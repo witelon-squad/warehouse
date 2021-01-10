@@ -127,12 +127,13 @@ $ docker-compose build --no-cache --pull
 ```
 ## REST
 
-|Lp  |nazwa  | akcja|
-|--|--|--|
-| 1 | GET | |
-| 2| POST| |
-| 3 | PUT| |
-| 4 | DELETE| |
+| Lp  | nazwa  | akcja                                                                                                                                |
+| --- | ------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| 1   | GET    | /products pobiera wszystkie możliwe produkty z bazy danych \n /products/{id} pobiera jeden konkretny produkt sprecyzowany przez 'id' |
+| 2   | POST   | /products dodaje nowy produkt do bazy danych na podstawie przekazanego ciała                                                         |
+| 3   | PUT    | /products/{id} zamienia istniejący produkt na danym id z przekazanym ciałem                                                          |
+| 4   | DELETE | /products/{id} usuwa z bazy danych istniejący produkt o podanym id                                                                   |
+| 5   | PATCH  | /products/{id} zmniejsza ilość danego produktu o 1 jednostkę w bazie danych  
 
 ##  Contributors
 
